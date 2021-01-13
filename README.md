@@ -34,7 +34,7 @@
 
 ### Association
 
-- has_one :solds
+- has_one :sold
 - belongs_to : user
 
 ## solds テーブル
@@ -46,22 +46,22 @@
 
 ### Association
 
-- belongs_to :items
-- belongs_to :users
-- has_one :addresses
+- belongs_to :item
+- belongs_to :user
+- has_one :address
 
 ## addresses テーブル
 
-| Column           | Type       | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| postcode         | integer    | null: false                    |
-| prefecture       | string     | null: false                    |
-| address          | string     | null: false                    |
-| house_number     | string     | null: false                    |
-| building_number  | string     |                                |
-| phone_number     | string     | null: false                    |
-| sold             | references | null: false, foreign_key: true |
+| Column                       | Type       | Options                        |
+| ---------------------------- | ---------- | ------------------------------ |
+| postcode                     | string     | null: false                    |
+| shipping_prefecture_id       | integer    | null: false                    |
+| address                      | string     | null: false                    |
+| house_number                 | string     | null: false                    |
+| building_number              | string     |                                |
+| phone_number                 | string     | null: false                    |
+| sold                         | references | null: false, foreign_key: true |
 
 ### Association
 
--  belongs_to :solds
+-  belongs_to :sold
