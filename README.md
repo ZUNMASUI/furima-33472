@@ -7,31 +7,36 @@
 | nickname   | string | null: false |
 | email      | string | null: false |
 | password   | string | null: false |
-| real name  | text   | null: false |
-| kananame   | text   | null: false |
-| position   | text   | null: false |
+| realname   | string | null: false |
+| kananame   | string | null: false |
 | birthday   | string | null: false |
-### Association
-
-- has_many :prototypes
-- has_many :comments
-
-## prototypes テーブル
-
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| title      | string     | null: false                    |
-| catch_copy | text       | null: false                    |
-| concept    | text       | null: false                    |
-| image      |            |                                |
-| user       | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :comments
+- has_many :items
+- has_many :solds
+
+## items テーブル
+
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| title               | string     | null: false                    |
+| image               |            |                                |
+| explanation         | text       | null: false                    |
+| category            | string     | null: false                    |
+| condition           | string     | null: false                    |
+| shipping_fee        | string     | null: false                    |
+| shipping_prefecture | string     | null: false                    |
+| shipping_days       | string     | null: false                    |
+| price               | integer    | null: false                    |
+| user                | references | null: false, foreign_key: true |
+
+### Association
+
+- has_one :solds
 - belongs_to : user
 
-## comments テーブル
+## solds テーブル
 
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
@@ -43,3 +48,15 @@
 
 - belongs_to :prototypes
 - belongs_to :users
+
+## addresses テーブル
+
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| text      | text       | null: false                    |
+| user      | references | null: false, foreign_key: true |
+| prototype | references | null: false, foreign_key: true |
+
+### Association
+
+- has one :solds
