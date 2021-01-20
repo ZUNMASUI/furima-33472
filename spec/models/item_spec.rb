@@ -39,10 +39,21 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Category is not a number", "Category can't be blank")
       end
 
+      it 'categroy_idが1だった場合に登録が出来ないこと' do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+
       it 'condition_idがない場合は登録できないこと' do
         @item.condition_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition is not a number", "Condition can't be blank")
+      end
+      it 'condition_idが1だった場合に登録が出来ないこと' do
+        @item.condition_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition must be other than 1")
       end
 
       it 'shipping_fee_idがない場合は登録できないこと' do
@@ -50,17 +61,32 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee is not a number", "Shipping fee can't be blank")
       end
+      it 'shipping_fee_idが1だった場合に登録が出来ないこと' do
+        @item.shipping_fee_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fee must be other than 1")
+      end
 
       it 'shipping_days_idがない場合は登録できないこと' do
         @item.shipping_days_id = nil
         @item.valid?
         expect(@item.errors[:shipping_days_id]).to include("is not a number", "can't be blank")
       end
+      it 'shipping_days_idが1だった場合に登録が出来ないこと' do
+        @item.shipping_days_id = '1'
+        @item.valid?
+        expect(@item.errors[:shipping_days_id]).to include("must be other than 1")
+      end
 
       it 'shipping_prefecture_idがない場合は登録できないこと' do
         @item.shipping_prefecture_id = nil
         @item.valid?
         expect(@item.errors[:shipping_prefecture_id]).to include("is not a number", "can't be blank")
+      end
+      it 'shipping_prefecture_idが1だった場合に登録が出来ないこと' do
+        @item.shipping_prefecture_id = '1'
+        @item.valid?
+        expect(@item.errors[:shipping_prefecture_id]).to include("must be other than 1")
       end
       it 'imageがない場合は登録できないこと' do
         @item.image = nil
@@ -82,6 +108,21 @@ RSpec.describe Item, type: :model do
 
       it 'priceが10000000だと登録できないこと' do
         @item.price = '10000000'
+        @item.valid?
+        expect(@item.errors[:price]).to include('is out of setting range')
+      end
+      it '全角文字では登録できないこと' do
+        @item.price = 'てすと'
+        @item.valid?
+        expect(@item.errors[:price]).to include('is out of setting range')
+      end
+      it '半角英数混合では登録できないこと' do
+        @item.price = '45sh'
+        @item.valid?
+        expect(@item.errors[:price]).to include('is out of setting range')
+      end
+      it '半角英語だけでは登録できないこと' do
+        @item.price = 'aaaaaaa'
         @item.valid?
         expect(@item.errors[:price]).to include('is out of setting range')
       end
