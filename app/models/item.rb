@@ -12,11 +12,14 @@ class Item < ApplicationRecord
     validates :title
     validates :explanation
     validates :category_id
-    validates :condition_id
+    validates :condition_id 
     validates :shipping_fee_id
     validates :shipping_prefecture_id
     validates :shipping_days_id
     validates :price
+    validates :image
   end
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range"}
+  validates :price, format:{ with: /\A[0-9]+\z/, message: 'It is invalid. Price includes double-byte numbers' }
   has_one_attached :image
 end
