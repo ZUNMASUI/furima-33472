@@ -36,57 +36,57 @@ RSpec.describe Item, type: :model do
       it 'category_idがない場合は登録できないこと' do
         @item.category_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category is not a number", "Category can't be blank")
+        expect(@item.errors.full_messages).to include('Category is not a number', "Category can't be blank")
       end
 
       it 'categroy_idが1だった場合に登録が出来ないこと' do
         @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
       it 'condition_idがない場合は登録できないこと' do
         @item.condition_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition is not a number", "Condition can't be blank")
+        expect(@item.errors.full_messages).to include('Condition is not a number', "Condition can't be blank")
       end
       it 'condition_idが1だった場合に登録が出来ないこと' do
         @item.condition_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
 
       it 'shipping_fee_idがない場合は登録できないこと' do
         @item.shipping_fee_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping fee is not a number", "Shipping fee can't be blank")
+        expect(@item.errors.full_messages).to include('Shipping fee is not a number', "Shipping fee can't be blank")
       end
       it 'shipping_fee_idが1だった場合に登録が出来ないこと' do
         @item.shipping_fee_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping fee must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping fee must be other than 1')
       end
 
       it 'shipping_days_idがない場合は登録できないこと' do
         @item.shipping_days_id = nil
         @item.valid?
-        expect(@item.errors[:shipping_days_id]).to include("is not a number", "can't be blank")
+        expect(@item.errors[:shipping_days_id]).to include('is not a number', "can't be blank")
       end
       it 'shipping_days_idが1だった場合に登録が出来ないこと' do
         @item.shipping_days_id = '1'
         @item.valid?
-        expect(@item.errors[:shipping_days_id]).to include("must be other than 1")
+        expect(@item.errors[:shipping_days_id]).to include('must be other than 1')
       end
 
       it 'shipping_prefecture_idがない場合は登録できないこと' do
         @item.shipping_prefecture_id = nil
         @item.valid?
-        expect(@item.errors[:shipping_prefecture_id]).to include("is not a number", "can't be blank")
+        expect(@item.errors[:shipping_prefecture_id]).to include('is not a number', "can't be blank")
       end
       it 'shipping_prefecture_idが1だった場合に登録が出来ないこと' do
         @item.shipping_prefecture_id = '1'
         @item.valid?
-        expect(@item.errors[:shipping_prefecture_id]).to include("must be other than 1")
+        expect(@item.errors[:shipping_prefecture_id]).to include('must be other than 1')
       end
       it 'imageがない場合は登録できないこと' do
         @item.image = nil
@@ -97,7 +97,8 @@ RSpec.describe Item, type: :model do
       it 'priceがない場合は登録できないこと' do
         @item.price = nil
         @item.valid?
-        expect(@item.errors[:price]).to include("can't be blank", "is out of setting range", "It is invalid. Price includes double-byte numbers")
+        expect(@item.errors[:price]).to include("can't be blank", 'is out of setting range',
+                                                'It is invalid. Price includes double-byte numbers')
       end
 
       it 'priceが299以下だと登録できないこと' do
