@@ -4,6 +4,9 @@ class ItemsController < ApplicationController
   def index
     @items = Item.includes(:user).order('created_at DESC')
   end
+  
+  def show
+  end
 
   def create
     @item = Item.create(item_params)
