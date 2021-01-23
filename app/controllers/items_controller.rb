@@ -5,6 +5,13 @@ class ItemsController < ApplicationController
     @items = Item.includes(:user).order('created_at DESC')
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+  # def edit
+  #   @item = Item.find(params[:id])
+  # end
+
   def create
     @item = Item.create(item_params)
     if @item.save
