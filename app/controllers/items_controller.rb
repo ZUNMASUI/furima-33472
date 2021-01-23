@@ -12,6 +12,10 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def update
+    
+  end
+
   def create
     @item = Item.create(item_params)
     if @item.save
