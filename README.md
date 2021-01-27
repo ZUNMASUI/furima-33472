@@ -52,15 +52,15 @@
 
 ## addresses テーブル
 
-| Column                       | Type       | Options                        |
-| ---------------------------- | ---------- | ------------------------------ |
-| postcode                     | string     | null: false                    |
-| shipping_prefecture_id       | integer    | null: false                    |
-| address                      | string     | null: false                    |
-| house_number                 | string     | null: false                    |
-| building_number              | string     |                                |
-| phone_number                 | string     | null: false                    |
-| sold                         | references | null: false, foreign_key: true |
+| Column                     | Type       | Options                       |
+| -------------------------- | ---------- |-------------------------------|
+| postcode                   | string     |null:false                    | 
+| shipping_prefecture_id     | integer    |null:false                     |
+| address                    | string     |null:false                     |
+| house_number               | string     |null:false                     |
+| building_number            | string     |                               |
+| phone_number               | string     |null:false                     |
+| sold                       |references | null: false, foreign_key: true |
 
 ### Association
 
