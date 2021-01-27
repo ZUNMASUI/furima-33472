@@ -38,6 +38,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @sold = Sold.new
   end
 
   private
