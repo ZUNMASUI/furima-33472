@@ -10,6 +10,7 @@ class SoldsController < ApplicationController
   end
 
   def create
+    @item = Item.find(params[:item_id]) 
     @sold_address = SoldAddress.new(sold_params)
     if @sold_address.valid?
        @sold_address.save
