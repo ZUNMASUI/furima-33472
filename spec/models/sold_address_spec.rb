@@ -3,15 +3,23 @@ require 'rails_helper'
 RSpec.describe SoldAddress, type: :model do
   describe '商品購入動作について' do
     before do
-      @sold_address = FactoryBot.build(:sold_address)
+      @user = FactoryBot.build(:user)
+      @item = FactoryBot.build(:item)
+
+      @sold_address = FactoryBot.build(:sold_address,user_id: @user,item_id: @item)
     end
     context '内容に問題ない場合' do
 
      it 'すべての値が正しく入力されていれば保存できること' do
       expect(@sold_address).to be_valid
      end
+     it 'building_numberは空でも保存できること' do
+      @sold_address.building_number = nil
+      expect(@sold_address).to be_valid
+     end
     end
     context '内容に問題がある場合' do
+
      it 'postcodeが空だと保存できないこと' do
       @sold_address.postcode = nil
       @sold_address.valid?
@@ -37,10 +45,7 @@ RSpec.describe SoldAddress, type: :model do
       @sold_address.valid?
       expect(@sold_address.errors.full_messages).to include("Address can't be blank")
      end
-     it 'building_numberは空でも保存できること' do
-      @sold_address.building_number = nil
-      expect(@sold_address).to be_valid
-     end
+     
      it 'house_numberが空だと保存できないこと' do
       @sold_address.house_number = nil
       @sold_address.valid?
@@ -61,11 +66,26 @@ RSpec.describe SoldAddress, type: :model do
       @sold_address.valid?
       expect(@sold_address.errors.full_messages).to include("Phone number is invalid. Include not hyphen(-)", "Phone number is too long (maximum is 11 characters)")
      end
+     it 'phone_numberが英数混合では登録できないこと' do
+      @sold_address.phone_number = '0901123aaaa'
+      @sold_address.valid?
+      expect(@sold_address.errors.full_messages).to include("Phone number is invalid. Include not hyphen(-)")
+     end
      it "tokenが空では登録できないこと" do
       @sold_address.token = nil
       @sold_address.valid?
       expect(@sold_address.errors.full_messages).to include("Token can't be blank")
-    end
+     end
+     it "user_idが空では登録できないこと" do
+      @sold_address.user_id = nil
+      @sold_address.valid?
+      expect(@sold_address.errors.full_messages).to include("User can't be blank")
+     end
+     it "item_idが空では登録できないこと" do
+      @sold_address.item_id= nil
+      @sold_address.valid?
+      expect(@sold_address.errors.full_messages).to include("Item can't be blank")
+     end
     end
   end
 end

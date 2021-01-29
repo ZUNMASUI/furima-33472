@@ -11,6 +11,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if @item.sold.present?
+      redirect_to action: :index
+    end
   end
 
   def destroy

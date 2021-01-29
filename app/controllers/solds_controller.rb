@@ -7,10 +7,6 @@ before_action :move_to_index
     @sold_address = SoldAddress.new
   end
   
-
-  def new
-  end
-
   def create 
     @item = Item.find(params[:item_id])
     @sold_address = SoldAddress.new(sold_params)
