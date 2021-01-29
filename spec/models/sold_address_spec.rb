@@ -36,7 +36,7 @@ RSpec.describe SoldAddress, type: :model do
       expect(@sold_address.errors[:shipping_prefecture_id]).to include('is not a number', "can't be blank")
      end
      it 'shipping_prefecture_idが1だった場合に登録が出来ないこと' do
-      @sold_address.shipping_prefecture_id = '1'
+      @sold_address.shipping_prefecture_id = 1
       @sold_address.valid?
       expect(@sold_address.errors[:shipping_prefecture_id]).to include('must be other than 1')
      end
