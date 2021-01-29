@@ -1,7 +1,7 @@
 class SoldAddress
   include ActiveModel::Model
 
-  attr_accessor :postcode,:shipping_prefecture_id,:address,:house_number,:building_number,:phone_number,:item_id,:user_id
+  attr_accessor :postcode,:shipping_prefecture_id,:address,:house_number,:building_number,:phone_number,:item_id,:user_id,:token
 
    with_options presence: true do
      validates :postcode, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
@@ -11,6 +11,7 @@ class SoldAddress
      validates :phone_number, format: { with: /\A0[5789]0\d{4}\d{4}\z/, message: "is invalid. Include not hyphen(-)" }
      validates :item_id
      validates :user_id
+     validates :token
     end
     validates :phone_number, length: { maximum: 11 }
   def save

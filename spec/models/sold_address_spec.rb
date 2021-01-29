@@ -61,6 +61,11 @@ RSpec.describe SoldAddress, type: :model do
       @sold_address.valid?
       expect(@sold_address.errors.full_messages).to include("Phone number is invalid. Include not hyphen(-)", "Phone number is too long (maximum is 11 characters)")
      end
+     it "tokenが空では登録できないこと" do
+      @sold_address.token = nil
+      @sold_address.valid?
+      expect(@sold_address.errors.full_messages).to include("Token can't be blank")
+    end
     end
   end
 end
