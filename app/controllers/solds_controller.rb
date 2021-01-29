@@ -1,14 +1,13 @@
 class SoldsController < ApplicationController
 before_action :authenticate_user!, only: [:index, :new, :create]
+before_action :set_item, only: [:index, :create]
 before_action :move_to_index
 
   def index
-    @item = Item.find(params[:item_id])
     @sold_address = SoldAddress.new
   end
   
   def create 
-    @item = Item.find(params[:item_id])
     @sold_address = SoldAddress.new(sold_params)
     if @sold_address.valid?
        pay_item
@@ -35,8 +34,11 @@ before_action :move_to_index
      currency: 'jpy'                 # 通貨の種類（日本円）
       )
   end
-  def move_to_index
+  def set_item
     @item = Item.find(params[:item_id])
+  end
+  def move_to_index
+    set_item
     if @item.sold.present? 
     redirect_to root_path
     end
