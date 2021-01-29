@@ -8,7 +8,9 @@ class Item < ApplicationRecord
 
   validates :category_id, :condition_id, :shipping_days_id, :shipping_fee_id, :shipping_prefecture_id,
             numericality: { other_than: 1 }
+
   belongs_to :user
+  has_one :sold
   with_options presence: true do
     validates :title
     validates :explanation
