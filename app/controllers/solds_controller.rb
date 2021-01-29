@@ -1,5 +1,5 @@
 class SoldsController < ApplicationController
-before_action :authenticate_user!, only: [:index, :new, :create]
+before_action :authenticate_user!, only: [:index, :create]
 before_action :set_item, only: [:index, :create]
 before_action :move_to_index
 
@@ -38,7 +38,6 @@ before_action :move_to_index
     @item = Item.find(params[:item_id])
   end
   def move_to_index
-    set_item
     if @item.sold.present? 
     redirect_to root_path
     end

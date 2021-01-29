@@ -52,7 +52,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    set_item
     if @item.sold.present?
       redirect_to action: :index
     elsif @item.user != current_user
