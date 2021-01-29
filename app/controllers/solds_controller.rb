@@ -38,7 +38,9 @@ before_action :move_to_index
     @item = Item.find(params[:item_id])
   end
   def move_to_index
-    if @item.sold.present? 
+    if @item.sold.present?
+      redirect_to root_path
+    elsif @item.user == current_user
     redirect_to root_path
     end
   end
